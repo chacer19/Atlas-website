@@ -124,7 +124,7 @@
     const bizdevList = document.getElementById('bizdev-team-list');
     const teamPreview = document.getElementById('team-preview-grid');
     if (execGrid || advisorGrid || opsList || bizdevList || teamPreview) {
-      tasks.push(fetchJSON('advisors.json').then((advisors) => {
+            tasks.push(fetchJSON('advisors.json').then(({items: advisors}) => {
         if (execGrid) renderExecutives(execGrid, advisors);
         if (advisorGrid) renderAdvisorGrid(advisorGrid, advisors);
         if (opsList) renderPlainList(opsList, advisors, 'operations');
@@ -135,18 +135,18 @@
 
     const memoGrid = document.getElementById('memo-grid');
     if (memoGrid) {
-      tasks.push(fetchJSON('insights.json').then((posts) => renderInsightCards(memoGrid, posts)));
+      tasks.push(fetchJSON('insights.json').then(({items: posts}) => renderInsightCards(memoGrid, posts)));
     }
 
     const whitepapersGrid = document.getElementById('whitepapers-grid');
     if (whitepapersGrid) {
-      tasks.push(fetchJSON('whitepapers.json').then((papers) => renderWhitepapers(whitepapersGrid, papers)));
+      tasks.push(fetchJSON('whitepapers.json').then(({items: papers}) => renderWhitepapers(whitepapersGrid, papers)));
     }
 
     const testimonialsGrid = document.getElementById('testimonials-grid');
     const homeTestimonials = document.getElementById('home-testimonials');
     if (testimonialsGrid || homeTestimonials) {
-      tasks.push(fetchJSON('testimonials.json').then((items) => {
+      tasks.push(fetchJSON('testimonials.json').then(({items}) => {
         if (testimonialsGrid) renderTestimonialGrid(testimonialsGrid, items);
         if (homeTestimonials) renderTestimonialStack(homeTestimonials, items);
       }));
